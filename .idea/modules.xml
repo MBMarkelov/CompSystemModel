@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pythonTask1.iml" filepath="$PROJECT_DIR$/.idea/pythonTask1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/CompSystemModel.iml" filepath="$PROJECT_DIR$/.idea/CompSystemModel.iml" />
     </modules>
   </component>
 </project>

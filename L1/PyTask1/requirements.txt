@@ -1,4 +1,0 @@
-numpy
-pulp
-cvxpy
-scipy

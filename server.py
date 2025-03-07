@@ -2,10 +2,11 @@ from fastapi import FastAPI,File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 
-from L1.PyTasks.task1 import minimaize_solution
+from L1.PyTasks.task1 import minimize_solution
 from L1.PyTasks.task2 import trends_analysis
-from all_labs.lab_2.drown_balls import drown_balls
 import json
+from fastapi import UploadFile, File
+
 
 app = FastAPI()
 
@@ -17,26 +18,28 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-@app.post("/lab_1/get_trends/")
-async def trends_endpoint(file: UploadFile = File(...)):
-    contents = await file.read()
-    with open("data.csv", "wb") as f:
-        f.write(contents)
-    return {"image_url": get_trends("data.csv")}
+#@app.post("/lab_1/get_trends/")
+#async def trends_endpoint(file: UploadFile = File(...)):
+ #   contents = await file.read()
+  #  with open("data.csv", "wb") as f:
+   #     f.write(contents)
+    #return {"image_url": get_trends("data.csv")}
 
-@app.get("L1/trend-analysis")
-def get_trend_analysis():
-    result = trends_analysis("/home/mark/Documents/github/CompSystemModel/L1/price.csv")
+
+@app.post("/L1/PyTasks/task2/trends_analysis/")
+async def upload_file(file: UploadFile = File(...)):
+    file_path = f"/tmp/{file.filename}"  # временное хранилище
+    with open(file_path, "wb") as f:
+        f.write(await file.read())
+    
+    result = trends_analysis(file_path)  # анализируем тренды
     return JSONResponse(content=result)
 
-@app.post("/lab_1/maximize_profit/")
-async def maximize_profit_endpoint(data: dict):
-    result = minimaize_solution(json.dumps(data))
-    return json.loads(result)
+#@app.post("/L1/trends_analysis/")
+#async def trends_analysis(data: dict):
+ #   result = minimaize_solution(json.dumps(data))
+  #  return json.loads(result)
 
-@app.post("/lab_2/drown_balls/")
-async def drown_balls_endpoint(data: dict):
-    return {"image_url": drown_balls(json.dumps(data))}
 
 if __name__ == "__main__":
     import uvicorn

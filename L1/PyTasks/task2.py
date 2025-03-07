@@ -4,7 +4,7 @@ import json
 
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt #altair, bokea
 from sklearn.metrics import r2_score
 from scipy.optimize import curve_fit
 
@@ -62,18 +62,15 @@ def trends_analysis(data):
 
 if __name__ == "__main__":
     result_json = trends_analysis("/home/mark/Documents/github/CompSystemModel/L1/price.csv")
-    # Конвертация JSON-объекта в строку
     json_str = json.dumps(result_json, indent=4)
 
-    # Выводим строку JSON
     print(json_str)
 
     # Если нужно сохранить в файл
     with open("result.json", "w") as file:
         json.dump(result_json, file, indent=4)
 
-    # Если нужно загрузить обратно в Python-объект
     with open("result.json", "r") as file:
         loaded_json = json.load(file)
 
-    print(loaded_json["image_url"])  # Доступ к значению
+    print(loaded_json["image_url"])
