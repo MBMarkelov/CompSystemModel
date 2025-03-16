@@ -23,11 +23,11 @@ def model(y, t, m, g, rho_liquid, r, mu):
 def drop_ball(json_params: str):
     params = json.loads(json_params)
 
-    r = params.get("r", 0.15)
+    r = params.get("r", 0.13)
     g = params.get("g", 9.81)
-    rho_ball = params.get("rho_ball", 1100)
-    rho_liquid = params.get("rho_liquid", 680)
-    mu = params.get("mu", 0.0006)
+    rho_ball = params.get("rho_ball", 7800)
+    rho_liquid = params.get("rho_liquid", 800)
+    mu = params.get("mu", 0.00015)
     h = params.get("h", 10.5)
 
     V = (4/3) * np.pi * r**3

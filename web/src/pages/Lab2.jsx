@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const liquids = {
   glycerin: { name: 'Глицерин', rho: 1260, mu: 1.5},
-  kerosene: { name: 'Керосин', rho: 800, mu: 0.5}
+  kerosene: { name: 'Керосин', rho: 800, mu: 0.015}
 };
 
 const materials = {
@@ -51,7 +51,7 @@ const Lab2 = () => {
         <h2>Настройки погружения</h2>
         <label>
           Размер шарика (r):
-          <input type="number" value={radius} onChange={(e) => setRadius(parseFloat(e.target.value))} step="0.01" min="0.01" max="10.0" style={{ width: '100%', marginTop: '5px' }} />
+          <input type="number" value={radius} onChange={(e) => setRadius(parseFloat(e.target.value))} step="0.001" min="0.001" max="5.000" style={{ width: '100%', marginTop: '5px' }} />
         </label>
         <label>
           Выберите жидкость:
@@ -75,7 +75,7 @@ const Lab2 = () => {
       {modalOpen && (
         <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
           <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '10px', position: 'relative' }}>
-            <img key={imageUrl} // Этот ключ заставит React перерисовать картинку
+            <img key={imageUrl}
               src={imageUrl}
               alt="Результат погружения"
               style={{ maxWidth: '3500px', maxHeight: '500vh', borderRadius: '5px' }}/>

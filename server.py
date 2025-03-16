@@ -2,9 +2,10 @@ from fastapi import FastAPI,File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 
-from L1.PyTasks.task1 import minimize_solution
 from L1.PyTasks.task2 import trends_analysis
 from L2.PyTasks.ball import drop_ball
+from L3.dichotomy import dichotomy_selection
+from L3.gold_ratio import  golden_selection_scipy
 import json
 from fastapi import UploadFile, File
 
@@ -33,12 +34,15 @@ async def ball_endpoint(data: dict):
     print(f"Received data: {data}")  # Логируем данные, которые приходят
     return {"image_url": drop_ball(json.dumps(data))}
 
+@app.get("/lab_3/golden_selection/")
+async def extrema_endpoint():
+    result = golden_selection_scipy()
+    return JSONResponse(content=result)
 
-
-#@app.post("/L1/trends_analysis/")
-#async def trends_analysis(data: dict):
- #   result = minimaize_solution(json.dumps(data))
-  #  return json.loads(result)
+@app.get("/lab_3/dichotomy_selection/")
+async def analyze_endpoint():
+    result = dichotomy_selection()
+    return JSONResponse(content=result)
 
 
 if __name__ == "__main__":
