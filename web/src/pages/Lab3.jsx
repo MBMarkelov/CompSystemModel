@@ -13,7 +13,7 @@ function App() {
     setdichotomyData(null);
     
     try {
-      const response = await fetch('http://localhost:8000/lab_3/golden_selection/');
+      const response = await fetch('http://localhost:8000/L3/golden_selection/');
       if (!response.ok) {
         throw new Error('Ошибка при получении данных золотого сечения');
       }
@@ -25,16 +25,16 @@ function App() {
     setLoading(false);
   };
 
-  const handleNewton = async () => {
+  const handledichotomy = async () => {
     setLoading(true);
     setError(null);
     setGoldenData(null);
     setdichotomyData(null);
     
     try {
-      const response = await fetch('http://localhost:8000/lab_3/dichotomy_selection/');
+      const response = await fetch('http://localhost:8000/L3/dichotomy_selection/');
       if (!response.ok) {
-        throw new Error('Ошибка при получении данных метода Ньютона');
+        throw new Error('Ошибка при получении данных метода Дихотомии');
       }
       const data = await response.json();
       setdichotomyData(data);
@@ -51,8 +51,8 @@ function App() {
         <button onClick={handleGoldenSelection} style={{ marginRight: '10px' }}>
           Золотое сечение
         </button>
-        <button onClick={handleNewton}>
-          Ньютон
+        <button onClick={handledichotomy}>
+          Метод Дихотомии
         </button>
       </div>
 
@@ -77,21 +77,23 @@ function App() {
 
       {dichotomyData && (
         <div>
-          <h2>Результаты метода Ньютона</h2>
+          <h2>Результаты метода Дихотомии</h2>
+          <p>Локальный минимум: x = {dichotomyData.min.x}, y = {dichotomyData.min.y}</p>
+          <p>Локальный максимум: x = {dichotomyData.max.x}, y = {dichotomyData.max.y}</p>
           <ul>
-            {dichotomyData.critical_points.map((point, index) => (
-              <li key={index}>
-                {point.type}: x = {point.x}, y = {point.y}
-              </li>
+          {dichotomyData.extrema_points.map((x, index) => (
+                <li key={index}>
+                    Экстремум: x = {x}
+                </li>
             ))}
-          </ul>
-          {dichotomyData.image_base64 && (
-            <img
-              src={`data:image/png;base64,${dichotomyData.image_base64}`}
-              alt="График метода Ньютона"
-              style={{ maxWidth: '100%', marginTop: '10px' }}
-            />
-          )}
+                    </ul>
+          {dichotomyData.image && (
+                <img
+                    src={`data:image/png;base64,${dichotomyData.image}`}
+                    alt="График метода Дихотомии"
+                    style={{ maxWidth: '100%', marginTop: '10px' }}
+                />
+            )}
         </div>
       )}
     </div>

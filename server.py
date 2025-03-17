@@ -34,12 +34,12 @@ async def ball_endpoint(data: dict):
     print(f"Received data: {data}")  # Логируем данные, которые приходят
     return {"image_url": drop_ball(json.dumps(data))}
 
-@app.get("/lab_3/golden_selection/")
+@app.get("/L3/golden_selection/")
 async def extrema_endpoint():
     result = golden_selection_scipy()
     return JSONResponse(content=result)
 
-@app.get("/lab_3/dichotomy_selection/")
+@app.get("/L3/dichotomy_selection/")
 async def analyze_endpoint():
     result = dichotomy_selection()
     return JSONResponse(content=result)
